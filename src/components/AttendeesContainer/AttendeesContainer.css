@@ -1,0 +1,19 @@
+.attendees_container{
+    width: 250px;
+    height: 300px;
+    margin: 0 0 0 30px;
+    padding: 5px 15px 5px 5px;
+
+
+    font-weight: 700;
+    text-align: center;
+    overflow: hidden;
+
+}
+
+.attendees_content{
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    margin-top: 10px;
+}
