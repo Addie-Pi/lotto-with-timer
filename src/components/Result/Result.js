@@ -5,10 +5,8 @@ import { restart, setFakeAttendees } from '../../features/lists/listSlice'
 const Result = () => {
     const { winner } = useSelector((store) => store.list);
     const dispatch = useDispatch();
-    console.log(' winner', winner);
 
     const restartLotto = () => {
-        console.log('Restart');
         dispatch(restart())
         dispatch(setFakeAttendees())
     }
@@ -22,8 +20,7 @@ const Result = () => {
           <img src={winner.userPhoto} alt="" />
         </div>
         <p className="result_name">
-          {winner.first_name}
-          {winner.last_name}
+          {winner.first_name} {winner.last_name}
         </p>
       </div>
       <div className="result_action">

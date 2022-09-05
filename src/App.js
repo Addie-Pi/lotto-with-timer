@@ -15,7 +15,6 @@ function App() {
 
   useEffect(() => {
     dispatch(setFakeAttendees());
-    console.log('app')
   }, [dispatch])
 
   if (!isCountdownOver){

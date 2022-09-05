@@ -47,16 +47,16 @@ const CountdownTimer = () => {
     }
 
     const getInputMinutes = (event) => {
-      console.log('e.target.value', event.target.value)
-
       setInputMinutes(event.target.value);
-      
     }
 
     const submit = (event) => {
       event.preventDefault();
 
-      setCountdownMinutes(inputMinutes * 60);
+      caluculateCountdownTime(inputMinutes * 60);
+
+      setCountdownMinutes(inputMinutes * 60-1);
+     
       setInputMinutes('');
     }
 

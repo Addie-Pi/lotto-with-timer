@@ -7,8 +7,7 @@ const initialState = {
   attendees: [],
   winner: [],
   fakeAttendees: [],
-  isCountdownOver: false,
-  isCountdownStart: false
+  isCountdownOver: false
 }
 
 const listSlice = createSlice({
@@ -17,19 +16,22 @@ const listSlice = createSlice({
   reducers: {
     setFakeAttendees: (state) => {
       // select random number from 1-200
-      const randomNumsOfFakeAttendees = Math.floor(Math.random() * 201)
-      // decide how many lotto attendees will be
-      const fakeAttendees = fakeUserData.slice(randomNumsOfFakeAttendees - 1)
-      console.log('fakeAttendees, ', fakeAttendees)
+      let randomNumsOfFakeAttendees = Math.floor(Math.random() * 201)
+      // make the minimum attendees to be 2
+      if (randomNumsOfFakeAttendees < 2) {
+        randomNumsOfFakeAttendees = 2;
+      }
 
-      state.fakeAttendees = fakeAttendees;
-      state.attendees = fakeAttendees;
+      // generate the lotto attendees[]
+      const fakeAttendees = fakeUserData.slice(0, randomNumsOfFakeAttendees) 
+  
+      state.fakeAttendees = fakeAttendees
+      state.attendees = fakeAttendees
     },
     
     selectWinner: (state) => {
-      
+      // choose the winner's index
       let selectedPosition = Math.floor(Math.random() * state.fakeAttendees.length)
-      console.log('selectedPosition ', selectedPosition);
       state.winner = state.attendees[selectedPosition]
     },
 
@@ -42,8 +44,6 @@ const listSlice = createSlice({
     },
   },
 })
-
-console.log('listSlice', listSlice);
 
 export const { setFakeAttendees, selectWinner, changeCountdownOverstatus, restart } =
   listSlice.actions
