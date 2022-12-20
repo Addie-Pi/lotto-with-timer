@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import fakeUserData from '../../fakeUserData'
 
 
-
 const initialState = {
   attendees: [],
   winner: [],
@@ -49,3 +48,6 @@ export const { setFakeAttendees, selectWinner, changeCountdownOverstatus, restar
   listSlice.actions
 
 export default listSlice.reducer;
+
+
+

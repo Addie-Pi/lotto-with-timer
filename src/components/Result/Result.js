@@ -28,6 +28,9 @@ const Result = () => {
           重新抽獎
         </button>
       </div>
+
+
+
     </div>
   )
 }

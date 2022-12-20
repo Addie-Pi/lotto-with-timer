@@ -36,9 +36,14 @@ const CountdownTimer = () => {
     const caluculateCountdownTime = (totalCountdownTimeInSecs) => { 
       const calculatSecs = totalCountdownTimeInSecs % 60;
       const calculatMins = Math.floor(totalCountdownTimeInSecs / 60);
+      console.log('calculatSecs', calculatSecs);
+      console.log('calculatMins', calculatMins)
 
       if (totalCountdownTimeInSecs >= 0) {
+        
         totalCountdownTimeInSecs --;
+        const calculatSecs = totalCountdownTimeInSecs % 60
+        const calculatMins = Math.floor(totalCountdownTimeInSecs / 60)
 
         setCountdownMinutes(totalCountdownTimeInSecs);
         setTextMinutes(('0' + calculatMins).slice(-2));
@@ -55,7 +60,7 @@ const CountdownTimer = () => {
 
       caluculateCountdownTime(inputMinutes * 60);
 
-      setCountdownMinutes(inputMinutes * 60-1);
+      // setCountdownMinutes(inputMinutes * 60-1);
      
       setInputMinutes('');
     }
