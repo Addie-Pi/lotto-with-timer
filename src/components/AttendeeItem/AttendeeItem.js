@@ -4,7 +4,7 @@ import './AttendeeItem.css'
 const AttendeeItem = ({ attendeeItem }) => {
   
   return (
-    <>
+    <> 
       <div className="attendeeItem_container">
         <div className="attendeeItem_pic">
           <img src={attendeeItem.userPhoto} alt="" />
