@@ -10,7 +10,7 @@ import './CountdownTimer.css'
 
 const CountdownTimer = () => {
   const [inputMinutes, setInputMinutes] = useState('')
-  const [countdownMinutes, setCountdownMinutes] = useState();
+  const [countdownSeconds, setCountdownSeconds] = useState(0);
   const [textMinutes, setTextMinutes] = useState('00');
   const [textSeconds, setTextSeconds] = useState('00');
   const [isRunning, setIsRunning] = useState(false);
@@ -21,36 +21,28 @@ const CountdownTimer = () => {
   useEffect(() => {
     if (!isRunning) return
 
-    if (countdownMinutes > 0) {
-      const toCountdown = setInterval(() => {
-        caluculateCountdownTime(countdownMinutes)
+    if (countdownSeconds > 0) {
+      const timer = setTimeout(() => {
+        setCountdownSeconds(prev => prev - 1)
       }, 1000)
-
       return () => {
-        clearInterval(toCountdown)
+        clearTimeout(timer)
       }
     } else {
       dispatch(changeCountdownOverstatus());
       dispatch(selectWinner());
+      setIsRunning(false)
     }
-  }, [countdownMinutes, isRunning, dispatch])
+  }, [countdownSeconds, isRunning, dispatch])
 
 
-  const caluculateCountdownTime = (totalCountdownTimeInSecs) => {
-    let calculatSecs = totalCountdownTimeInSecs % 60;
-    let calculatMins = Math.floor(totalCountdownTimeInSecs / 60);
+  useEffect(() => {
+    const mins = Math.floor(countdownSeconds / 60)
+    const secs = countdownSeconds % 60
+    setTextMinutes(('0' + mins).slice(-2))
+    setTextSeconds(('0' + secs).slice(-2))
+  }, [countdownSeconds])
 
-
-    if (totalCountdownTimeInSecs >= 0) {
-      totalCountdownTimeInSecs--;
-      calculatSecs = totalCountdownTimeInSecs % 60
-      calculatMins = Math.floor(totalCountdownTimeInSecs / 60)
-
-      setCountdownMinutes(totalCountdownTimeInSecs);
-      setTextMinutes(('0' + calculatMins).slice(-2));
-      setTextSeconds(('0' + calculatSecs).slice(-2));
-    }
-  }
 
   const getInputMinutes = (event) => {
     setInputMinutes(event.target.value);
@@ -59,7 +51,8 @@ const CountdownTimer = () => {
   const submit = (event) => {
     event.preventDefault();
 
-    caluculateCountdownTime(inputMinutes * 60);
+    const totalSecs = parseInt(inputMinutes, 10) * 60
+    setCountdownSeconds(totalSecs);
     setIsRunning(true);
     setInputMinutes('');
   }
